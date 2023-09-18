@@ -3,47 +3,72 @@ import './CostForm.css'
 
 
 
-export default function CostForm() {
+export default function CostForm(props) {
 
-    const [name, setName] = useState('');
-    const [sum, setSum] = useState('');
-    const [date, setDate] = useState('');
+    const [inputName, setInputName] = useState('');
+    const [inputSum, setInputSum] = useState('');
+    const [inputDate, setInputDate] = useState('');
 
     const nameChangerHandler = (event) => {
-        setName(event.target.value);
+        setInputName(event.target.value);
     }
     const sumChangerHandler = (event) => {
-        setSum(event.target.value);
+        setInputSum(event.target.value);
     }
     const dateChangerHandler = (event) => {
-        setDate(event.target.value);
+        setInputDate(event.target.value);
     }
 
-    
+    // Дополнительный способ обновления с учетом старой версии состояния
+    // const nameChangerHandler = (event) => {
+    //     setName((previosState) => {
+    //         return {
+    //             ...previosState,
+    //             name: event.target.value
+    //         }
+    //     })
+    // }
+
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const costData = {
+            name: inputName,
+            sum:  inputSum,
+            date: new Date(inputDate)
+        }
+
+        props.onSaveCostDate(costData);
+        setInputName('');
+        setInputSum('');
+        setInputDate('');
+
+    }
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
         <div className='new-cost__controls'>
             <div className='new-cost__control'>
                 <label>
                     Название
                 </label>
-                <input type='text' onChange={nameChangerHandler}/>
+                <input value={inputName} type='text' onChange={nameChangerHandler}/>
             </div>
             <div className='new-cost__control'>
                 <label>
                     Сумма
                 </label>
-                <input type='number' onChange={sumChangerHandler} min='0.01' step='0.01'/>
+                <input value={inputSum} type='number' onChange={sumChangerHandler} min='0.01' step='0.01'/>
             </div>
             <div className='new-cost__control'>
                 <label>
                     Дата
                 </label>
-                <input type='date' onChange={dateChangerHandler} min='2019-01-01' max='2023-12-12'/>
+                <input value={inputDate} type='date' onChange={dateChangerHandler} min='2019-01-01' max='2023-12-12'/>
             </div>
             <div className='new-cost__actions'>
-                <button type='submit'>
+                <button  type='submit'>
                     Добавить расход
                 </button>
             </div>

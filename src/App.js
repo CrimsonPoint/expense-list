@@ -1,10 +1,11 @@
 import Costs from "./components/Costs/Costs";
 import NewCost from "./components/NewCost/NewCost";
+import React, {useState} from "react";
+
 
 
 function App() {
-
-  const costs = [
+  const startDataCosts = [
     {
       id: 0,
       date: new Date(2021,2,12),
@@ -24,11 +25,19 @@ function App() {
       amount: 109.7
     },
   ];
- 
+
+  const [costs, setCosts] = useState(startDataCosts);
+
+
+  const addCostHandler = (cost) =>{
+    console.log(cost)
+    setCosts(cost);
+
+  }
 
   return (
     <div>
-      <NewCost/>
+      <NewCost onAddCost= {addCostHandler}/>
      <Costs costs={costs}/>
      
     </div>
