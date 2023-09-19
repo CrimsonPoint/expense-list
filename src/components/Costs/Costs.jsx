@@ -7,7 +7,7 @@ import CostsFilter from '../CostFilter/CostFilter';
 export default function Costs(props) {
 
     const [selectedYear, setSelectedYear] = useState('2022');
-
+    const {year} = props;
 
     function painter(cost){
         const colors = {
@@ -24,11 +24,13 @@ export default function Costs(props) {
     }
 
     const itemsList = props.costs.map((item, index) => (
-        <CostItem moneyStyle={painter(item.amount)} key={index} date={item.date} title={item.title} amount={item.amount}/>
+        <CostItem moneyStyle={painter(item.amount)} id={index} key={index} date={item.date} title={item.title} amount={item.amount}/>
       ));
 
       const filterData = (data) => {
-        setSelectedYear(data)
+        setSelectedYear(data);
+        //props.filterYear(data);
+        year(data);
       }
   return (
     

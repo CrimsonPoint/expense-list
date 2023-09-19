@@ -34,12 +34,13 @@ export default function CostForm(props) {
         event.preventDefault();
 
         const costData = {
-            name: inputName,
-            sum:  inputSum,
+            title: inputName,
+            amount:  inputSum,
             date: new Date(inputDate)
         }
 
         props.onSaveCostDate(costData);
+        console.log(`cost data ${costData.name}`)
         setInputName('');
         setInputSum('');
         setInputDate('');
