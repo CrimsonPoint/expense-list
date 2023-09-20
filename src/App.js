@@ -32,7 +32,7 @@ const startDataCosts = [
 function App() {
 
   const [costs, setCosts] = useState(startDataCosts);
-  const [costs2, setCosts2] = useState(costs);
+  
 
   const addCostHandler = (cost) =>{
     setCosts(prevCost => {
@@ -40,20 +40,14 @@ function App() {
     });
   }
 
-  const filterYear = (year) => {
-    const filteredCosts = costs.filter(cost => cost.date.getFullYear() === parseInt(year))
-    //console.log(year);
-
-    setCosts2(filteredCosts);
-    //return costs.filter(cost => cost.date.getFullYear() === parseInt(year))
-  } 
+  
 
   return (
     <div>
 
       <NewCost onAddCost= {addCostHandler} />
 
-      <Costs year={filterYear} costs={costs2}/>
+      <Costs costs={costs}/>
      
     </div>
   );

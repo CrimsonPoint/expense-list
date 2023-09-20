@@ -7,7 +7,18 @@ import CostsFilter from '../CostFilter/CostFilter';
 export default function Costs(props) {
 
     const [selectedYear, setSelectedYear] = useState('2022');
-    const {year} = props;
+
+    const filterCosts = props.costs.filter(cost => cost.date.getFullYear().toString() === selectedYear)
+
+    const itemsList = filterCosts.map((item, index) => (
+        <CostItem moneyStyle={painter(item.amount)} id={index} key={index} date={item.date} title={item.title} amount={item.amount}/>
+    ));
+
+    const filterData = (data) => {
+        setSelectedYear(data);
+    }
+
+    const ErrorMessageForEmptyArray = <p>Вы не вносили расходы в этом году</p>;
 
     function painter(cost){
         const colors = {
@@ -23,20 +34,12 @@ export default function Costs(props) {
         return style_color;
     }
 
-    const itemsList = props.costs.map((item, index) => (
-        <CostItem moneyStyle={painter(item.amount)} id={index} key={index} date={item.date} title={item.title} amount={item.amount}/>
-      ));
-
-      const filterData = (data) => {
-        setSelectedYear(data);
-        //props.filterYear(data);
-        year(data);
-      }
+   
   return (
     
     <Card className='costs'>
         <CostsFilter year={selectedYear} onChangeYear = {filterData}/>
-        {itemsList}
+        {itemsList.length === 0 ? ErrorMessageForEmptyArray : itemsList}
     </Card>
   )
 }
