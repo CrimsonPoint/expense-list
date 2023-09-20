@@ -8,6 +8,7 @@ export default function CostForm(props) {
     const [inputName, setInputName] = useState('');
     const [inputSum, setInputSum] = useState('');
     const [inputDate, setInputDate] = useState('');
+    const [ flag, setFlag ] = useState(true);
 
     const nameChangerHandler = (event) => {
         setInputName(event.target.value);
@@ -29,6 +30,9 @@ export default function CostForm(props) {
     //     })
     // }
 
+    const changeFlag = () => {
+        setFlag(prev => !prev)
+    }
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -44,9 +48,13 @@ export default function CostForm(props) {
         setInputName('');
         setInputSum('');
         setInputDate('');
-
+        changeFlag();
     }
 
+    if(flag)
+    {
+        return <button onClick={changeFlag}>Добавить новый расход</button>
+    }
   return (
     <form onSubmit={submitHandler}>
         <div className='new-cost__controls'>
@@ -71,6 +79,9 @@ export default function CostForm(props) {
             <div className='new-cost__actions'>
                 <button  type='submit'>
                     Добавить расход
+                </button>
+                <button onClick={changeFlag}>
+                    Отмена
                 </button>
             </div>
         </div>

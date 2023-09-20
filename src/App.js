@@ -32,7 +32,7 @@ const startDataCosts = [
 function App() {
 
   const [costs, setCosts] = useState(startDataCosts);
-  
+  const [addNewCostFlag, setAddNewCostFlag] = useState(false);
 
   const addCostHandler = (cost) =>{
     setCosts(prevCost => {
