@@ -8,7 +8,6 @@ export default function CostItem(props) {
   const [title, setTitle] = useState(props.title);
 
   const changeDescriptionHandler = () =>{
-    
     setTitle(title + '1');
   };
 

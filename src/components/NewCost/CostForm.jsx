@@ -44,7 +44,7 @@ export default function CostForm(props) {
         }
 
         props.onSaveCostDate(costData);
-        console.log(`cost data ${costData.name}`)
+        console.log(`cost data ${costData.title}`)
         setInputName('');
         setInputSum('');
         setInputDate('');

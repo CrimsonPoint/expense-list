@@ -1,5 +1,5 @@
 import React from 'react'
-import 'DiagramBar.css'
+import './DiagramBar.css'
 
 export default function DiagramBar(props) {
 
@@ -14,7 +14,7 @@ export default function DiagramBar(props) {
     <div className='diagram-bar'>
         <div className='diagram-bar__inner'>
             <div className='diagram-bar__fill' style={{height: barFillHeigth}}>
-                {props.value}
+                {/* {props.value} */}
             </div>    
         </div>
         <div className='diagram-bar__label'>

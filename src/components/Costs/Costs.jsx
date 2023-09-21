@@ -3,6 +3,7 @@ import "./Costs.css"
 import CostItem from '../costitem/CostItem';
 import Card from '../Card/Card';
 import CostsFilter from '../CostFilter/CostFilter';
+import CostsDiagram from '../diagram/CostsDiagram';
 
 export default function Costs(props) {
 
@@ -11,7 +12,7 @@ export default function Costs(props) {
     const filterCosts = props.costs.filter(cost => cost.date.getFullYear().toString() === selectedYear)
 
     const itemsList = filterCosts.map((item, index) => (
-        <CostItem moneyStyle={painter(item.amount)} id={index} key={index} date={item.date} title={item.title} amount={item.amount}/>
+        <CostItem moneyStyle={painter(item.amount)} id={index} key={item.title} date={item.date} title={item.title} amount={item.amount}/>
     ));
 
     const filterData = (data) => {
@@ -39,6 +40,7 @@ export default function Costs(props) {
     
     <Card className='costs'>
         <CostsFilter year={selectedYear} onChangeYear = {filterData}/>
+        <CostsDiagram costs={filterCosts}/>
         {itemsList.length === 0 ? ErrorMessageForEmptyArray : itemsList}
     </Card>
   )

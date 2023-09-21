@@ -17,13 +17,14 @@ export default function CostsDiagram(props) {
         )
     }
 
-    for (let cost in props.costs) {
-        
-        
+    for (let cost of props.costs) {
+        const costMonth = cost.date.getMonth();
+        diagramData[costMonth].value += cost.amount;
     }
 
 
+
   return (
-    <Diagram/>
+    <Diagram dataSets = {diagramData}/>
   )
 }
